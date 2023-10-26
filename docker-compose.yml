@@ -1,0 +1,38 @@
+version: '3.9'
+services:
+  streamlit-app:
+    build:
+      context: ./streamlit  # Specify the directory containing your Streamlit Dockerfile
+    ports:
+      - "8501:8501"
+    depends_on:
+      - mongo
+    networks:
+      - mynetwork
+
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - mynetwork
+    volumes:
+      - mongodb_data2:/data/db  # Mount a volume for MongoDB data
+
+
+  fastapi:
+    build:
+      context: ./fastapi
+    container_name: fastapi
+    networks:
+      - mynetwork
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongo
+
+networks:
+  mynetwork:
+
+volumes:
+  mongodb_data2:  # Define the volume for MongoDB data

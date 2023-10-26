@@ -1,0 +1,6 @@
+fastapi==0.104.0
+motor==3.3.1  # An example version
+pymongo==4.5.0  # An example version
+uvicorn==0.23.2  # An example version
+pydantic==2.4.2  # An example version
+
